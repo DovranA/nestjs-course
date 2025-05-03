@@ -22,6 +22,7 @@ export class MovieDto {
   @Max(new Date().getFullYear())
   releaseYear: number;
 
+  @ApiProperty()
   @IsString()
   imageUrl: string;
 
