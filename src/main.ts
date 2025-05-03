@@ -16,7 +16,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   // SwaggerModule.setup('api', app, documentFactory);
   app.use(
-    '/reference',
+    '/docs',
     apiReference({
       content: document,
     }),

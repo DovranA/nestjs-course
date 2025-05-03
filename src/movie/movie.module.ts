@@ -3,7 +3,6 @@ import { MovieService } from './movie.service';
 import { MovieController } from './movie.controller';
 
 @Module({
-  imports: [],
   controllers: [MovieController],
   providers: [MovieService],
 })
