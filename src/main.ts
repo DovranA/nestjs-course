@@ -1,26 +1,16 @@
 import { NestFactory } from '@nestjs/core';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { apiReference } from '@scalar/nestjs-api-reference';
 import { ValidationPipe } from '@nestjs/common';
-
+import * as cookieParser from 'cookie-parser';
+import { setupSwagger } from './util/swagger.util';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
-    .setVersion('1.0')
-    .addTag('cats')
-    .build();
-  const document = () => SwaggerModule.createDocument(app, config);
+  app.use(cookieParser());
+
+  setupSwagger(app);
+
   app.useGlobalPipes(new ValidationPipe());
-  // SwaggerModule.setup('api', app, documentFactory);
-  app.use(
-    '/docs',
-    apiReference({
-      content: document,
-    }),
-  );
-  await app.listen(process.env.PORT ?? 5000);
+
+  await app.listen(process.env.PORT ?? 4200);
 }
 bootstrap();
